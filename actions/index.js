@@ -17,6 +17,7 @@ export function addDeck (newDeckName) {
 }
 
 export function addQuestion (deckName, newQuestion) {
+    console.log(deckName)
     return {
         type: ADD_QUESTION,
         deckName,

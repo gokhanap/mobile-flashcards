@@ -5,22 +5,12 @@ import { connect } from 'react-redux'
 import { receiveDecks } from '../actions'
 
 class ListDecks extends React.Component {
-  state = {
-  }
-
 
   componentDidMount () {
-    // AsyncStorage.setItem('React', JSON.stringify(this.state.React))
-    // AsyncStorage.setItem('JavaScript', JSON.stringify(this.state.JavaScript))
-
-    // .then((results) => this.updateState(results))
     fetchFlashcards().then(results =>
       results === null
       ? submitFlashcards(this.props.flashcards)
       : this.props.receiveDecks(results))
-    // fetchFlashcards().then(results => this.props.receiveDecks(results))
-    //submitFlashcards(this.props.flashcards)
-
   }
 
   updateState = () => {
@@ -37,27 +27,29 @@ class ListDecks extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation
-    // console.log(this.props.flashcards)
     const deckNames = Object.keys(this.props.flashcards)
 
     return (
+
       <View style={styles.container}>
 
         <FlatList
           keyExtractor={(item, index) => item}
           data={deckNames}
           renderItem={({item}) => (
-            <View style={styles.deckContainer}>
-              <TouchableOpacity onPress={() => navigate('ViewDeck', {'title': item})}>
+              <TouchableOpacity
+              style={styles.deckContainer}
+              onPress={() => navigate('ViewDeck', {'title': item})}>
                 <Text style={styles.deckTitle}>{item}</Text>
-                <Text style={styles.deckText}>{this.countCards(item)} cards</Text>
+                <Text style={styles.deckText}>{this.countCards(item)} CARDS</Text>
               </TouchableOpacity>
-            </View>
             )}
         />
 
+{/*
+  // TEST Buttons
 
-        <View style={styles.deckContainer}>
+        <View>
           <TouchableOpacity onPress={() => fetchFlashcards().then(results => console.log(results))}>
             <Text
             style={styles.deckText}
@@ -65,7 +57,7 @@ class ListDecks extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.deckContainer}>
+        <View>
           <TouchableOpacity onPress={() => submitFlashcards(this.props.flashcards)}>
             <Text
             style={styles.deckText}
@@ -73,13 +65,13 @@ class ListDecks extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.deckContainer}>
+        <View>
           <TouchableOpacity onPress={() => removeDeck()}>
             <Text
             style={styles.deckText}
             >clear</Text>
           </TouchableOpacity>
-        </View>
+        </View>*/}
 
       </View>
     );
@@ -89,31 +81,40 @@ class ListDecks extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     alignItems: 'stretch',
     justifyContent: 'flex-start',
   },
+
   deckContainer: {
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomColor: 'gray',
-    borderBottomWidth: 1,
+    borderBottomColor: 'salmon',
+    borderBottomWidth: 2,
+    borderRadius: 10,
     padding: 20,
+    margin: 20,
+    marginBottom: 10,
+    marginTop: 10,
+    shadowOpacity: 0.15,
+    shadowRadius: 5,
+    shadowOffset: { height: 0, width: 0 },
+    elevation: 3,
   },
+
   deckTitle: {
+    fontFamily: 'Ubuntu-Bold',
     fontSize: 24,
-    fontWeight: 'bold',
   },
+
   deckText: {
+    fontFamily: 'Ubuntu-Regular',
     color: 'black',
     fontSize: 14,
     textAlign: 'center',
   },
 });
-
-
 
 const mapStateToProps = (state, { navigation }) => ({
   flashcards: state
@@ -121,7 +122,6 @@ const mapStateToProps = (state, { navigation }) => ({
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
   receiveDecks: (data) => dispatch(receiveDecks(data)),
-  // fetchPosts: (data) => dispatch(fetchPosts(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListDecks)

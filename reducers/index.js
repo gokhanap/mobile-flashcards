@@ -19,7 +19,6 @@ function entries (state = defaultData, action) {
         }
       }
     case ADD_QUESTION :
-    console.log(newQuestion, deckName)
       return {
         ...state,
         [deckName]: {
@@ -40,25 +39,46 @@ const defaultData = {
     title: 'React',
     questions: [
       {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
+        question: 'Does React Native work with Android?',
+        answer: true,
       },
       {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
+        question: 'Are Ajax requests made in the componentDidMount lifecycle event?',
+        answer: true,
+      },
     ]
   },
   JavaScript: {
     title: 'JavaScript',
     questions: [
       {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+        question: 'Closure is the combination of a function and the lexical environment within which that function was declared.',
+        answer: true,
       }
     ]
-  }
+  },
+  Css: {
+    title: 'Css',
+    questions: [
+      {
+        question: 'BorderWidth property adjusts color of the border.',
+        answer: false,
+      },
+    ]
+  },
+  Html: {
+    title: 'Html',
+    questions: [
+      {
+        question: 'Html does not have its own syntax.',
+        answer: false,
+      },
+      {
+        question: 'Html does not have its own syntax.',
+        answer: false,
+      },
+    ]
+  },
 }
-
 
 export default entries

@@ -11,7 +11,7 @@ export function clearLocalNotification () {
 function createNotification () {
   return {
     title: 'Lets have a quiz!',
-    body: "👋 You haven't completed a quiz today!",
+    body: "👋 You haven't completed any quiz for today!",
     ios: {
       sound: true,
     },
@@ -46,7 +46,6 @@ export function setLocalNotification () {
                   repeat: 'day',
                 }
               )
-
               AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
             }
           })
